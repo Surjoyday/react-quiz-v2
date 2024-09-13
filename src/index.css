@@ -259,3 +259,8 @@ progress {
   font-size: inherit;
   padding: 0.8rem;
 }
+
+.btn.error_btn {
+  width: 120px;
+  margin: 30px auto;
+}

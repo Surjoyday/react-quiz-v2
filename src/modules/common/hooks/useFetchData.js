@@ -28,8 +28,7 @@ function reducer(state, action) {
 }
 
 function useFetchData(URL) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { data, status } = state;
+  const [{ data, status }, dispatch] = useReducer(reducer, initialState);
 
   function handleStatusChange(newStatus) {
     dispatch({ type: "status/update", payload: newStatus });
@@ -50,7 +49,8 @@ function useFetchData(URL) {
           });
         } catch (err) {
           const errorMsg = err.message;
-          dispatch({ type: "data/failed", payload: errorMsg });
+          // dispatch({ type: "data/failed", payload: errorMsg });
+          // showBoundary(errorMsg);
         }
       }
 

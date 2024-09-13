@@ -1,3 +1,5 @@
+import { useErrorBoundary } from "react-error-boundary";
+
 function StartScreen({ totalQuestionCount, onStartQuiz }) {
   return (
     <div className="start">

@@ -11,8 +11,9 @@ import { Progress } from "@modules/details/components";
 import { useFetchData } from "@modules/common/hooks";
 import { useEffect, useReducer } from "react";
 
-const URL =
-  "https://my-json-server.typicode.com/Surjoyday/react-quiz-v2/questions";
+const URL = "http://localhost:8000/questions";
+
+const SEC_PER_QUESTION = 60;
 
 const initialState = {
   currentQuestionIndex: 0,
@@ -72,9 +73,8 @@ function App() {
 
   // Nulish colesing opertor will ensure that if points is not a number (undefined or null) it will make points 0 and then add 60, else 60 will be added to the points
   const timeForEachQuestion =
-    (questions?.at(currentQuestionIndex)?.points ?? 0) + 60;
+    (questions?.at(currentQuestionIndex)?.points ?? 0) + SEC_PER_QUESTION;
 
-  console.log(timeForEachQuestion);
   /// HANDLES DOCUMENT VISIBILTY -> IF USER MOVES TO A DIFFERENT TAB THE DOCUMENT VISIBILTY IS HIDDEN
   useEffect(
     function () {
@@ -97,7 +97,7 @@ function App() {
       <Header />
       <Main>
         {status === "loading" && <Loader />}
-        {status === "error" && <Error />}
+        {/* {status === "error" && <Error />} */}
         {status === "ready" && (
           <StartScreen
             totalQuestionCount={totalQuestionCount}
