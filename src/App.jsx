@@ -11,7 +11,8 @@ import { Progress } from "@modules/details/components";
 import { useFetchData } from "@modules/common/hooks";
 import { useEffect, useReducer } from "react";
 
-const URL = "http://localhost:8000/questions";
+const URL =
+  "https://my-json-server.typicode.com/Surjoyday/react-quiz-v2/questions";
 
 const initialState = {
   currentQuestionIndex: 0,
