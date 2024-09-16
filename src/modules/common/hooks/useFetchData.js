@@ -49,8 +49,7 @@ function useFetchData(URL) {
           });
         } catch (err) {
           const errorMsg = err.message;
-          // dispatch({ type: "data/failed", payload: errorMsg });
-          // showBoundary(errorMsg);
+          dispatch({ type: "data/failed", payload: errorMsg });
         }
       }
 

@@ -11,13 +11,16 @@ import { Progress } from "@modules/details/components";
 import { useFetchData } from "@modules/common/hooks";
 import { useEffect, useReducer } from "react";
 
-const URL = "http://localhost:8000/questions";
+const URL =
+  "http://localhost:8000/questions" ||
+  "https://my-json-server.typicode.com/Surjoyday/react-quiz-v2/questions";
 
 const SEC_PER_QUESTION = 60;
 
 const initialState = {
   currentQuestionIndex: 0,
   selectedOption: null,
+  prevSelectedOptions: [],
   points: 0,
   highScore: Number(localStorage.getItem("highScore") ?? 0),
 };
@@ -32,7 +35,7 @@ function reducer(state, action) {
       };
 
     case "answer/selected": {
-      const { index, points } = action.payload;
+      const { index, points, selectedAnswer } = action.payload;
       const newPoints = state.points + points;
 
       const newHighScore =
@@ -46,6 +49,7 @@ function reducer(state, action) {
         selectedOption: index,
         points: newPoints,
         highScore: newHighScore,
+        prevSelectedOptions: [...state.prevSelectedOptions, selectedAnswer],
       };
     }
 
@@ -59,7 +63,13 @@ function reducer(state, action) {
 
 function App() {
   const [
-    { currentQuestionIndex, selectedOption, points, highScore },
+    {
+      currentQuestionIndex,
+      selectedOption,
+      points,
+      highScore,
+      prevSelectedOptions,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -97,7 +107,7 @@ function App() {
       <Header />
       <Main>
         {status === "loading" && <Loader />}
-        {/* {status === "error" && <Error />} */}
+        {status === "error" && <Error />}
         {status === "ready" && (
           <StartScreen
             totalQuestionCount={totalQuestionCount}
@@ -119,6 +129,7 @@ function App() {
               isTheLastQuestion={isTheLastQuestion}
               changeStatus={changeStatus}
               timeForEachQuestion={timeForEachQuestion}
+              prevSelectedOptions={prevSelectedOptions}
             />
           </>
         )}
