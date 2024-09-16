@@ -12,7 +12,7 @@ import { useFetchData } from "@modules/common/hooks";
 import { useEffect, useReducer } from "react";
 
 const URL =
-  "https://my-json-server.typicode.com/Surjoyday/react-quiz-v2/questions";
+  "https://my-json-server.typicode.com/Surjoyday/react-quiz-v2";
 
 const SEC_PER_QUESTION = 60;
 
